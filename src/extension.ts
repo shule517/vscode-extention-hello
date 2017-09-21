@@ -21,6 +21,15 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage('Hello World!');
     });
 
+    vscode.window.onDidChangeTextEditorSelection((e: vscode.TextEditorSelectionChangeEvent) => {
+        let selection = e.selections[0];
+        let start = selection.start;
+        let end = selection.end;
+        console.log("select " + start.line + ":" + start.character + " -> " + end.line + ":" + end.character)
+    });
+    vscode.workspace.onDidChangeTextDocument((e: vscode.TextDocumentChangeEvent) => {
+        console.log("text " + e.document.getText());
+    });
     context.subscriptions.push(disposable);
 }
 
